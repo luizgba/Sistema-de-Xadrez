@@ -1,7 +1,7 @@
 package xadrez;
 
 public enum Cor {
-	PRETO,
-	BRANCO;
+	BLACK,
+	WHITE;
 
 }
