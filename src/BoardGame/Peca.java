@@ -1,4 +1,4 @@
-package BoardGame;
+package boardGame;
 
 public class Peca {
 
