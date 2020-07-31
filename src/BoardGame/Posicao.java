@@ -11,6 +11,14 @@ public class Posicao {
 		this.coluna = coluna;
 	}
 	
+	public void setLinha(int linha) {
+		this.linha = linha;
+	}
+	
+	public void setColuna(int coluna) {
+		this.coluna = coluna;
+	}
+	
 	public int getLinha() {
 		return linha;
 	}
@@ -20,7 +28,8 @@ public class Posicao {
 	}
 	
 	public void setValores (int linha, int coluna) {
-		
+		this.linha = linha;
+		this.coluna = coluna;
 	}
 	
 @Override

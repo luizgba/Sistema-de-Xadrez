@@ -1,9 +1,13 @@
 package aplicacao;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import xadrez.Cor;
+import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 import xadrez.PosicaoXadrez;
 
@@ -51,29 +55,78 @@ public class IU {
 		}
 	}
 	
+	public static void mostrarPartida(PartidaXadrez partidaXadrez, List<PecaXadrez> capturada) {
+		mostrarTabuleiro(partidaXadrez.getPecas());
+		System.out.println();
+		mostrarPecasCapturadas(capturada);
+		System.out.println();
+		System.out.println("Turno: " + partidaXadrez.getTurno());
+		if(!partidaXadrez.getCheckMate()) {
+		System.out.println("Esperando acao do jogador: " + partidaXadrez.getJogadorAtual());
+		if(partidaXadrez.getCheck()) {
+			System.out.println("Voce esta em xeque");
+		}
+	}
+	 else {
+		 System.out.println("Cheque-mate, parabens jogador: " + partidaXadrez.getJogadorAtual());
+	 }
+	}
 	public static void mostrarTabuleiro(PecaXadrez[][] pecas) {
 		
 		for (int lin = 0; lin < pecas.length; lin++) {
 			System.out.print((8 - lin) + "  ");
 			for (int col = 0; col < pecas.length; col++) {
-				mostrarPeca(pecas[lin][col]);
+				mostrarPeca(pecas[lin][col], false);
 			}
 			System.out.println();
 		}
 		System.out.println("   a b c d e f g h");
 	}
 	
-	private static void mostrarPeca(PecaXadrez peca) {
+	private static void mostrarPeca(PecaXadrez peca, boolean backGround) {
+		if(backGround) {
+			System.out.print(ANSI_RED_BACKGROUND);
+		}
 		if (peca == null) {
-			System.out.print("-");
+			System.out.print("-" + ANSI_RESET);
 		} else {
-			if(peca.getCor() == Cor.WHITE) {
-				System.out.print(ANSI_WHITE + peca + ANSI_RESET );
+			if(peca.getCor() == Cor.ROXO) {
+				System.out.print(ANSI_PURPLE + peca + ANSI_RESET );
 			} else {
 				System.out.print(ANSI_YELLOW + peca + ANSI_RESET );
 			}
 }
 		System.out.print(" ");
 }
+	
+public static void mostrarTabuleiro(PecaXadrez[][] pecas, boolean[][]movimentosPossiveis) {
 		
+		for (int lin = 0; lin < pecas.length; lin++) {
+			System.out.print((8 - lin) + "  ");
+			for (int col = 0; col < pecas.length; col++) {
+				mostrarPeca(pecas[lin][col], movimentosPossiveis[lin][col]);
+			}
+			System.out.println();
+		}
+		System.out.println("   a b c d e f g h");
+	}	
+
+	private static void mostrarPecasCapturadas(List<PecaXadrez> pecaCapturada) {
+		List<PecaXadrez> branca = pecaCapturada.stream().filter(x -> x.getCor() == Cor.ROXO).collect(Collectors.toList());
+		List<PecaXadrez> preta = pecaCapturada.stream().filter(x -> x.getCor() == Cor.AMARELO).collect(Collectors.toList());
+		
+		System.out.println("Pecas capturadas ");
+		System.out.print("Roxas: ");
+		System.out.print(ANSI_PURPLE);
+		System.out.print(Arrays.toString(branca.toArray()));
+		System.out.println(ANSI_RESET);
+		System.out.print("Amarelas: ");
+		System.out.print(ANSI_YELLOW);
+		System.out.print(Arrays.toString(preta.toArray()));
+		System.out.println(ANSI_RESET);
+	}
+
 }
+
+
+	
