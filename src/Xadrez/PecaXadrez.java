@@ -18,7 +18,7 @@ public abstract class PecaXadrez extends Peca {
 		return cor;
 	}
 	
-	public int contMovimento() {
+	public int getContMovimento() {
 		return contMovimento;
 	}
 	
@@ -26,7 +26,7 @@ public abstract class PecaXadrez extends Peca {
 		contMovimento++;
 	}
 	
-	public void DecrementarContMovimento() {
+	public void decrementarContMovimento() {
 		contMovimento--;
 	}
 	
@@ -36,7 +36,7 @@ public abstract class PecaXadrez extends Peca {
 	
 	protected boolean temPecaOponenteAqui(Posicao posicao) {
 		PecaXadrez p = (PecaXadrez)getTabuleiro().peca(posicao);
-		return p != null & p.getCor() != cor;
+		return p != null && p.getCor() != cor;
 		
 	}
 	

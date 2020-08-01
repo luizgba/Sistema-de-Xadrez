@@ -85,7 +85,7 @@ public class IU {
 	
 	private static void mostrarPeca(PecaXadrez peca, boolean backGround) {
 		if(backGround) {
-			System.out.print(ANSI_RED_BACKGROUND);
+			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
 		if (peca == null) {
 			System.out.print("-" + ANSI_RESET);
