@@ -38,6 +38,17 @@ public class Programa {
 				if(pecaCapturada != null) {
 					capturada.add(pecaCapturada);
 				}
+				
+				if(partidaXadrez.getPromocao() != null) {
+					System.out.println("Qual peca deseja promover? (B/Q/C/T)");
+					String tipo = teclado.nextLine().toUpperCase();
+					while (!tipo.equals("T") && !tipo.equals("B") && !tipo.equals("C") && !tipo.equals("Q")) {
+						System.out.println("Peca invalida! Qual peca deseja promover? (B/Q/C/T)");
+						tipo = teclado.nextLine().toUpperCase();
+				}
+					partidaXadrez.colocarPecaPromovida(tipo);
+
+			}
 			}
 			catch(ExcecaoXadrez e) {
 				System.out.println(e.getMessage());
